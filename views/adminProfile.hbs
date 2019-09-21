@@ -1,0 +1,55 @@
+{{#each users}}
+<a href="/users/{{UserId}}">
+    <h3>{{FirstName}} {{LastName}}</h3>
+    <br>
+</a> {{/each}}
+
+<a href="/users/logout">Log out</a>
+
+<script>
+    function onSubmit() {
+
+        const deleted = document.getElementById('deleted').value;
+
+        $.ajax({
+            url: '/users/{{ UserId }}',
+            contentType: 'application/json; charset=utf-8',
+            data: JSON.stringify({ deleted: deleted }),
+            method: 'PUT', complete: () => window.location.reload()
+        })
+    }
+    function onDelete() {
+        $.ajax({
+            url: '/users/{{UserId}}/delete',
+            method: 'DELETE', complete: () => window.location = "/users"
+        })
+    }
+</script>
+
+<div>
+    <button onclick="onDelete()" id="deleteButton1">Delete User</button>
+</div>
+<script>
+
+    function onSubmit() {
+
+        const deleted = document.getElementById('deleted').value;
+
+        $.ajax({
+            url: '/users/{{ Posts }}',
+            contentType: 'application/json; charset=utf-8',
+            data: JSON.stringify({ deleted: deleted }),
+            method: 'PUT', complete: () => window.location.reload()
+        })
+    }
+    function onDelete() {
+        $.ajax({
+            url: '/users/{{ Posts }}/delete',
+            method: 'DELETE', complete: () => window.location = "/posts"
+        })
+    }
+</script>
+
+<div>
+    <button onclick="onDelete()" id="deleteButton2">Delete Post</button>
+</div>
